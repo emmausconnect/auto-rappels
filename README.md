@@ -80,6 +80,7 @@ Une fois les modifications effectuées, cliquez sur Envoyer.
 Sur le smartphone, ouvrez l'application "Airemore".
 
 En haut à droite du téléphone, cliquez sur  &#8942;  -> `Adresse IP` et renseignez l'adresse IP du téléphone (sans le ":2333") dans le champ de texte sur l'ordinateur puis cliquez sur Envoyer.
+
 ![screen 8](Screen/screen_7.png)
 
 Une boîte de dialogue s'ouvre sur le téléphone et demande l'autorisation de se connecter : cliquez sur Confirmer.
