@@ -32,9 +32,9 @@ class AirmoreConnectionThread(QThread):
         )  # ouverture du fichier .xlsx via openpyXl et stockage du fichier dans un variable wb
         data = openpyxl.load_workbook(
             "./database/db.xlsx"
-        )  # ouverture de la base de donnée via openpyXl et stockage du fichier dans un variable db
+        )  # ouverture de la base de données via openpyXl et stockage du fichier dans une variable db
         self.file_data = wb  # ouverture au reste de la class
-        self.db = data  # '''
+        self.db = data  #                '''
 
 
     def run(self):  # connexion au téléphone via ip et pyAiremore run(self)
@@ -50,7 +50,6 @@ class AirmoreConnectionThread(QThread):
             )  # création de la session de messaging enfant de la session global
 
             # Attendre que le serveur Airmore soit en cours d'exécution sur le téléphone
-
             while not self.session.is_server_running:
                 time.sleep(1)
             if was_accepted == True:  # Si accepter
@@ -72,7 +71,7 @@ class AirmoreConnectionThread(QThread):
                     ):
                         service.send_message(  #                                             """"
                             str(self.sheet.cell(row=row_index, column=5).value), # envoyer le message service.send_message(numéro inscrit colonne 5 du fichier xlxs,
-                            self.replace_mess( # retour de la fonction replace_mess(message stocké dans la Base de donné à la ligne =valeur de la colonne z de la ligne lus))
+                            self.replace_mess( # retour de la fonction replace_mess(message stocké dans la base de donnés à la ligne =valeur de la colonne z de la ligne lus))
                                 self.db.active.cell(  
                                     int(
                                         self.sheet.cell(row=row_index, column=26).value
@@ -83,7 +82,7 @@ class AirmoreConnectionThread(QThread):
                             ),
                         )  #                                                 """"
                         self.sheet.cell(row=row_index, column=26).value = (
-                            0  # remise a zero de la cellule z
+                            0  # remise à zero de la cellule z
                         )
                 self.file_data.save(
                     self.chemin
@@ -194,163 +193,161 @@ class MainWindow(QWidget):
 
         # feuille de style QCss (Css) pour chaque élément de la fenêtre ( police, effet, animation, couleur)
         self.setStyleSheet(
-            """
-            * {
-               background-color : #272350;
-                font-family: Fira Sans;
-            }
-            QMessageBox *{
-                background-color: rgb(255,255,255);
-                color : rgb(255,255,255)
-            }
-            QMessageBox QLabel, QPushButton  {
-                color : rgb(0,0,0)
-            }
-            QMessageBox {
-                background-color: rgb(255,255,255);
-            }
-            Qwidget .QPushButton:hover {
-            background-color: rgb(0,0,0); /* Couleur de fond au survol */
-            border-color: #45a049; /* Couleur de la bordure au survol */
-            }
-            QPushButton {
-                background-color: rgb(230,230,230);
-                border-style: outset;
-                border-width: 2px;
-                border-radius: 5px;
-                border-color: rgb(250,250,250);
-                font: 24px;
-                padding: 2px;
-            }
-            QPushButton:hover {
-                background-color: rgb(255, 255, 255);
-                border-style: inset;
-            }
-            QCheckBox {
-                spacing: 5px;
-            }
-
-            QCheckBox::indicator {
-                width: 20px;
-                height: 20px;
-            }
-
-            QCheckBox::indicator:unchecked {
-                image: url(./img/checkbox_unchecked.png);
-            }
-
-            QCheckBox::indicator:unchecked:hover {
-                image: url(./img/checkbox_hover.png);
-            }
-            QCheckBox::indicator:checked {
-                image: url(./img/checkbox_checked.png);
-            }
-            QCheckBox::indicator:checked:hover {
-                image: url(./img/checkbox_checked_hover.png);
-            }
-            QCheckBox::indicator:indeterminate:hover {
-                image: url(./img/checkbox_hover.png);
-            } 
-            QCheckBox::indicator:disabled {
-                image: url(./img/checkbox_off.png); 
-            }
-            
-            QTableWidget *{
-                background-color:white;
-                color:black;
-            }
-            QTableWidget {
-                background-color:white;
-                color:black;
-                text-align: center;
-                border:5px solid black;
-            }
-            QTableWidget::item {
-                text-align: center;
-            }
-
-            QHeaderView::section:vertical
-            {
-                background-color:white;
-                color: black;
-                border-left: 1px solid black;
-                border-right: 1px solid black;
-                border-bottom: 2px solid black;
-                font-family: 'Fira Sans';
-                
-                padding-left: 4px;
-            }
-            QHeaderView::section:horizontal
-            {
-                background-color:white;
-                color: black;
-                border-left: : 1px solid black;
-                border-right: : 1px solid black;
-                border-bottom : 1px solid black;
-                border-left: 1px dashed black;
-                border-right: 1px dashed black;
-                font-family: 'Fira Sans';
-                font: 24px;
-                padding-left: 4px;
-            }
-
-            QScrollBar:vertical {
-                border:none;
-                background: grey;
-                width: 15px;
-            }
-
-            QScrollBar::handle:vertical {
-                background: grey;
-                min-height: 20px;
-            }
-
-            QTableWidget::item {
-                border-left:1px dashed black;
-                border-bottom: 2px solid black;
-                font-family: 'Fira Sans';
-                font : 20px;
-            }
-
-            QScrollArea{
-                border:none;
-                background : white;
-            }
-
-            QScrollBar::add-line:vertical {
-                border:none;
-                background: white;
-                height: 0px;
-                subcontrol-position: bottom;
-                subcontrol-origin: margin;
-            }
-
-            QScrollBar::sub-line:vertical {
-                border:none;
-                background: white;
-                height: 0px;
-                subcontrol-position: top;
-                subcontrol-origin: margin;
-            }
-
-            QScrollBar::add-page:vertical {
-                background: white;
-            }
-
-            QScrollBar::sub-page:vertical {
-                background: white;
-            }
-
-            QTableView::item::selected {
-                border-top: 2px solid #00acb0;
-                border-bottom: 2px solid #00acb0;
-                color:black;
-            }
-            QTextEdit {
-                background : white;
-            }
-                                    
-        """
+        ""    
+        "   * {"
+        "       background-color : #272350;"
+        "        font-family: Fira Sans;"
+        "    }"
+        "    QMessageBox *{"
+        "        background-color: rgb(255,255,255);"
+        "        color : rgb(255,255,255)"
+        "    }"
+        "    QMessageBox QLabel, QPushButton  {"
+        "        color : rgb(0,0,0)"
+        "    }"
+        "    QMessageBox {"
+        "        background-color: rgb(255,255,255);"
+        "    }"
+        "    Qwidget .QPushButton:hover {"
+        "    background-color: rgb(0,0,0); /* Couleur de fond au survol */"
+        "    border-color: #45a049; /* Couleur de la bordure au survol */"
+        "    }"
+        "    QPushButton {"
+        "        background-color: rgb(230,230,230);"
+        "        border-style: outset;"
+        "        border-width: 2px;"
+        "        border-radius: 5px;"
+        "        border-color: rgb(250,250,250);"
+        "        font: 24px;"
+        "        padding: 2px;"
+        "    }"
+        "    QPushButton:hover {"
+        "        background-color: rgb(255, 255, 255);"
+        "        border-style: inset;"
+        "    }"
+        "    QCheckBox {"
+        "        spacing: 5px;"
+        "    }"
+        ""
+        "    QCheckBox::indicator {"
+        "        width: 20px;"
+        "        height: 20px;"
+        "    }"
+        ""
+        "    QCheckBox::indicator:unchecked {"
+        "        image: url(./img/checkbox_unchecked.png);"
+        "    }"
+        ""
+        "    QCheckBox::indicator:unchecked:hover {"
+        "        image: url(./img/checkbox_hover.png);"
+        "    }"
+        "    QCheckBox::indicator:checked {"
+        "        image: url(./img/checkbox_checked.png);"
+        "    }"
+        "    QCheckBox::indicator:checked:hover {"
+        "        image: url(./img/checkbox_checked_hover.png);"
+        "    }"
+        "    QCheckBox::indicator:indeterminate:hover {"
+        "        image: url(./img/checkbox_hover.png);"
+        "    } "
+        "    QCheckBox::indicator:disabled {"
+        "        image: url(./img/checkbox_off.png); "
+        "    }"
+        "    "
+        "   QTableWidget *{"
+        "        background-color:white;"
+        "        color:black;"
+        "    }"
+        "    QTableWidget {"
+        "        background-color:white;"
+        "        color:black;"
+        "        text-align: center;"
+        "        border:5px solid black;"
+        "    }"
+        "    QTableWidget::item {"
+        "        text-align: center;"
+        "    }"
+        ""
+        "    QHeaderView::section:vertical"
+        "    {"
+        "        background-color:white;"
+        "        color: black;"
+        "        border-left: 1px solid black;"
+        "        border-right: 1px solid black;"
+        "        border-bottom: 2px solid black;"
+        "        font-family: 'Fira Sans';"
+        "        "
+        "        padding-left: 4px;"
+        "    }"
+        "    QHeaderView::section:horizontal"
+        "    {"
+        "        background-color:white;"
+        "        color: black;"
+        "        border-left: : 1px solid black;"
+        "        border-right: : 1px solid black;"
+        "        border-bottom : 1px solid black;"
+        "        border-left: 1px dashed black;"
+        "        border-right: 1px dashed black;"
+        "        font-family: 'Fira Sans';"
+        "        font: 24px;"
+        "        padding-left: 4px;"
+        "    }"
+        ""
+        "    QScrollBar:vertical {"
+        "        border:none;"
+        "        background: grey;"
+        "        width: 15px;"
+        "    }"
+        ""
+        "    QScrollBar::handle:vertical {"
+        "        background: grey;"
+        "        min-height: 20px;"
+        "    }"
+        ""
+        "    QTableWidget::item {"
+        "        border-left:1px dashed black;"
+        "        border-bottom: 2px solid black;"
+        "        font-family: 'Fira Sans';"
+        "        font : 20px;"
+        "    }"
+        ""
+        "    QScrollArea{"
+        "        border:none;"
+        "        background : white;"
+        "    }"
+        ""
+        "    QScrollBar::add-line:vertical {"
+        "        border:none;"
+        "        background: white;"
+        "        height: 0px;"
+        "        subcontrol-position: bottom;"
+        "        subcontrol-origin: margin;"
+        "    }"
+        ""
+        "    QScrollBar::sub-line:vertical {"
+        "        border:none;"
+        "        background: white;"
+        "        height: 0px;"
+        "        subcontrol-position: top;"
+        "        subcontrol-origin: margin;"
+        "    }"
+        ""
+        "    QScrollBar::add-page:vertical {"
+        "        background: white;"
+        "    }"
+        ""
+        "    QScrollBar::sub-page:vertical {"
+        "        background: white;"
+        "    }"
+        ""
+        "    QTableView::item::selected {"
+        "        border-top: 2px solid #00acb0;"
+        "        border-bottom: 2px solid #00acb0;"
+        "        color:black;"
+        "    }"
+        "    QTextEdit {"
+        "        background : white;"
+        "    }"
         )
         self.show_buttons() #appel de la focntion show_buttons pour afficher la page de selection de ficheir
 
@@ -420,7 +417,7 @@ class MainWindow(QWidget):
         self.clear_widgets() #su^pression des élément du container
 
         msg = QMessageBox()#création d'un message de réussite de connexion
-        msg.setText("La connexion avec le téléphone a été établie avec succès.") #texte du message
+        msg.setText("La connexion avec le téléphone a été établie avec succès. Tous les messages seront envoyés") #texte du message
         msg.setWindowTitle("Connexion réussie") #titre
         msg.setIcon(QMessageBox.Information) #type de box message
         msg.setStyleSheet("background-color: rgb(255, 255, 255)") #définit la couleur de fond
@@ -452,12 +449,12 @@ class MainWindow(QWidget):
         if file_path: #si fichier sélectionné
             self.selected_file = file_path
 
-            msg = QMessageBox()                                 #        """"
+            msg = QMessageBox()                                 #        ""
             msg.setText(f"Le fichier sélectionné est : {file_path}")
             msg.setWindowTitle("Fichier sélectionné")       #        message de succès de sélection d'un fichier
             msg.setIcon(QMessageBox.Information)
             msg.setStyleSheet("background-color: rgb(255, 255, 255)")
-            msg.exec_() #                                                """"
+            msg.exec_() #                                                ""
 
             self.file_input.setText(file_path) # remplis le champs de text avec le chemin du fichier
             self.file_input.setReadOnly(False) #rend le chemin editable dans le champs de texte
@@ -479,23 +476,30 @@ class MainWindow(QWidget):
         self.file_input.setReadOnly(True) #bloque l'édition du texte tant que non remplis
         self.file_input.show() #afficher l'élément
 
-        try: #charger le fichier si selectionner précédement ( back bouton)
+        try: #charger le fichier si selectionner précédement ( back bouton) et reset z colonnes
             self.file_input.setText(self.selected_file)
             self.file_input.setReadOnly(False)
-        except:
-            print("pas de fichier charger")
+            for row_index in range(
+                    1, self.file_data.active.max_row + 1
+                ):
+                self.file_data.active.cell(row=row_index, column=26).value = (
+                            0  # remise a zero de la cellule z
+                        )
+            self.file_data.save(self.selected_file) #enregistrement des modifs
+        except Exception as e:
+            print("pas de fichier charger", e)
 
         self.parcours_button = QPushButton("Parcours", self.container)#création du bouton parcours
         self.parcours_button.setGeometry(500, 425, 200, 50) #place/taille du bouton
-        self.parcours_button.clicked.connect(partial(self.handle, 2)) #connexion dub outon à la fonction handle avec l'agument "2"
+        self.parcours_button.clicked.connect(partial(self.handle, 2)) #connexion du bouton à la fonction handle avec l'agument "2"
         self.parcours_button.show() #afficher l'élément
 
         self.rendezvous_button = QPushButton("Rendez-vous", self.container) #création du bouton rendez-vous
         self.rendezvous_button.setGeometry(500, 500, 200, 50)#place /taille du bouton
-        self.rendezvous_button.clicked.connect(partial(self.handle, 3))#connexion du bouton à la fonction hadnle avec l'argument "3"
+        self.rendezvous_button.clicked.connect(partial(self.handle, 3))#connexion du bouton à la fonction handle avec l'argument "3"
         self.rendezvous_button.show()#afficher l'élément
 
-        self.browse_button = QPushButton("Choisir un Fichier", self.container)#création du boutons parcourir pour le choix de fichier
+        self.browse_button = QPushButton("Choisir un Fichier", self.container)#création du bouton parcourir pour le choix de fichier
         self.browse_button.setGeometry(350, 150, 500, 50)  # Position/taille du bouton
         self.browse_button.clicked.connect(self.browse_file) #connexion du bouton avec la fonction browse_file
         self.browse_button.show()#afficher l'élément
@@ -505,7 +509,7 @@ class MainWindow(QWidget):
         self.quit_button.clicked.connect(self.quit) #connexion du bouton avec la fonction quit()
         self.quit_button.show()#afficher l'élément
 
-    def is_file_valid(self, file_path):#fonction qui permet d'ouvri le fichier et gérer les erreur
+    def is_file_valid(self, file_path):#fonction qui permet d'ouvrir le fichier et gérer les erreurs
 
         try:
             wb = openpyxl.load_workbook(file_path)# Tentative d'ouverture du fichier avec openpyxl
@@ -516,7 +520,7 @@ class MainWindow(QWidget):
             self.file_data = None# Réinitialiser l'attribut de données du fichier
             return e #retourne l'erreur
 
-    def handle(self, type_num): #fonction d'affichage des donnée du fichier xlsx sous forme de tableau et selection des contact pour envoi du sms
+    def handle(self, type_num): #fonction d'affichage des données du fichier xlsx sous forme de tableau et selection des contacts pour envoi du sms
 
         if not hasattr(self, "selected_file") or not self.selected_file: #vérifie qu'un fichier à bien été sélectionné
             QMessageBox.warning(
@@ -538,16 +542,16 @@ class MainWindow(QWidget):
         num_displayed_rows = 0 #initialie l'index du tableau de l'app
 
         type_text = "" #init var type_text
-        if type_num == 1: #si argument "1 passer"
-            type_text = "Permanence Connectée" # modif de type_text
-        elif type_num == 2: #si argument "2 passer"
+        if type_num == 1: #si argument "1" passer
+            type_text = "Permanence Connectée" # modif de "type_text"
+        elif type_num == 2: #si argument "2" passer
             type_text = "Parcours d'initiation"  
-        elif type_num == 3:#si argument "3 passer"
+        elif type_num == 3:#si argument "3" passer
             type_text = "RDV bénéficiaire"
 
         
         try:
-            for row_index in range(1, num_rows + 1): #pour chaque ligne dans le fichier excel
+            for row_index in range(1, num_rows + 1): #pour chaque lignes dans le fichier excel
                 type_rdv = sheet.cell(
                     row=row_index, column=10 #recupere le type de rdv de la ligne
                 ).value  # Colonne J
@@ -558,7 +562,7 @@ class MainWindow(QWidget):
             QMessageBox.warning(
                 self,
                 "Avertissement",
-                f"Impossible de charger le fichier : {self.selected_file}", #si problème dans la lecture du fichier message d'erreur et retour
+                f"Impossible de charger le fichier : {self.selected_file}", #si problème(s) dans la lecture du fichier message d'erreur et retour
             )
             return
         
@@ -580,21 +584,21 @@ class MainWindow(QWidget):
 
         self.table_widget.setColumnCount(len(headers)) #définit le nombre de colonnes
         self.table_widget.setHorizontalHeaderLabels(headers) #ajoute les entêtes
-        self.table_widget.setColumnWidth(0, 200) #                      """"
+        self.table_widget.setColumnWidth(0, 200) #                      ""
         self.table_widget.setColumnWidth(1, 150)
         self.table_widget.setColumnWidth(2, 100)
         self.table_widget.setColumnWidth(3, 200)#                    définit la largeur de chaques colonnes
         self.table_widget.setColumnWidth(4, 200)
         self.table_widget.setColumnWidth(5, 120)
-        self.table_widget.setColumnWidth(6, 90)  #                      """"
+        self.table_widget.setColumnWidth(6, 90)  #                      ""
 
-        self.table_widget.setRowCount(num_displayed_rows) # définit le nombre de ligne dans le tableau (en fonction du nombre de contact)
+        self.table_widget.setRowCount(num_displayed_rows) # définit le nombre de lignes dans le tableau (en fonction du nombre de contact)
 
         for row_index in range(1, num_rows + 1): # pour chaque ligne du fichier xlsx
             type_rdv = sheet.cell(row=row_index, column=10).value  #recupere le type de rdv
             if type_text in type_rdv: # si type de rdv == type de rdv choisi
                 
-                nom_complet = QTableWidgetItem(#                                                 """"
+                nom_complet = QTableWidgetItem(#                                                 ""
                     str(sheet.cell(row=row_index, column=4).value)
                 ) 
                 date = str(sheet.cell(row=row_index, column=2).value)[:10]
@@ -612,7 +616,7 @@ class MainWindow(QWidget):
                     else:
                         observation = QTableWidgetItem(
                             str(sheet.cell(row=row_index, column=1).value)
-                            + ": "                                          #sion ecrire le type de rdv benef + observation indiquée
+                            + ": "                                          #sinon ecrire le type de rdv benef + observation indiquée
                             + str(sheet.cell(row=row_index, column=8).value)
                         )
                 else: #sinon
@@ -623,7 +627,7 @@ class MainWindow(QWidget):
                             str(sheet.cell(row=row_index, column=8).value) #sinon remplir avec l'observation indiquée
                         ) 
 
-                                                                 #                         """"""
+                                                                 #                         ""
 
                 self.table_widget.setItem(displayed_row_index, 0, nom_complet) #remplis la case nom_complet avec la valeur du fichier
                 nom_complet.setTextAlignment(Qt.AlignCenter) #alignement du texte au centre
@@ -673,7 +677,7 @@ class MainWindow(QWidget):
                 self.table_widget.setItemDelegate(FontDelegate()) #définit la police lorsque le texte est en cours de modification
                 displayed_row_index += 1 #ajoute 1 à l'index pour passer à la ligne suivante
 
-        self.table_widget.cellChanged.connect(self.set_enabled) #connect le changement d'une cellule à la fonction set_enabled qui verifie si les informations son valide
+        self.table_widget.cellChanged.connect(self.set_enabled) #connect le changement d'une cellule à la fonction set_enabled qui verifie si les informations sont valides
 
         self.global_checkbox = QCheckBox(
             "Sélectionner/Désélectionner Tout", self.container #création de la case à cocher Sélectionner/Désélectionner Tout
@@ -684,7 +688,7 @@ class MainWindow(QWidget):
         self.global_checkbox.stateChanged.connect(self.check_uncheck_all) #connect la case à cocher avec la fonction check_uncheck_all
         self.global_checkbox.show() #afficher l'élement
 
-        self.table_widget.resizeRowsToContents() #redéfinit la hauteur des ligne à leur contenu
+        self.table_widget.resizeRowsToContents() #redéfinit la hauteur des lignes à leur contenus
 
         self.validate_button = QPushButton("Valider", self.container) #création du bouton valider
         self.validate_button.setGeometry(500, 760, 200, 50) #position/taille du bouton
@@ -726,12 +730,12 @@ class MainWindow(QWidget):
         sheet = self.file_data.active  # Récupérer la feuille active
 
         if int(state) == 1: #si case cocher
-            sheet.cell(row=row_xls, column=26).value = int(type_num) #rempli la colonne z par le type de rdv (format num)
+            sheet.cell(row=row_xls, column=26).value = int(type_num) #remplit la colonne z par le type de rdv (format num)
         else:
             sheet.cell(row=row_xls, column=26).value = int(state) #sinon met la colonne z à 0
 
-                                                                            #rempli le fichier par les valeurs modifié du tableau
-        sheet.cell(row=row_xls, column=4).value = self.table_widget.item( #                       """"
+                                                                            #remplit le fichier par les valeurs modifiées du tableau
+        sheet.cell(row=row_xls, column=4).value = self.table_widget.item( #                       ""
             row, 0
         ).text()
         sheet.cell(row=row_xls, column=2).value = (
@@ -744,11 +748,11 @@ class MainWindow(QWidget):
             row, 4
         ).text()  # Colonne E
         sheet.cell(row=row_xls, column=7).value = self.table_widget.item(row, 5).text()
-                                                                        #                         """"
+                                                                        #                         ""
 
-        self.file_data.save(self.selected_file) #sauvegarde les modification dans le fichier
+        self.file_data.save(self.selected_file) #sauvegarde les modifications dans le fichier
 
-    def save_checked_values(self, type_num): #fonction permettant l'enregistrement des modification et le compte du nombre de case coché
+    def save_checked_values(self, type_num): #fonction permettant l'enregistrement des modifications et le compte du nombre de case coché
 
         if self.file_data is None:
             QMessageBox.warning(
@@ -778,7 +782,7 @@ class MainWindow(QWidget):
                 "Succès",
                 "Les valeurs ont bien été enregistrés, " #afficher message de succès et nombre de case cocher
                 + str(count)
-                + " message(s) seront envoyés",
+                + " message-s ser-a-ont envoyés",
             )
             self.mess(type_num)
         else:
@@ -788,27 +792,27 @@ class MainWindow(QWidget):
 
     def check_phone_number(self, row, column): #verifie que le numero de téléphone est dans un format valide
 
-        item = self.table_widget.item(row, 3) #recuper le widget du numéro de téléphone du tableau
+        item = self.table_widget.item(row, 3) #recupere le widget du numéro de téléphone du tableau
 
-        checkbox_widget = self.table_widget.cellWidget(item.row(), 6) #récuper le widget de la case à cocher
+        checkbox_widget = self.table_widget.cellWidget(item.row(), 6) #récupere le widget de la case à cocher
         checkbox = checkbox_widget.findChild(
             QCheckBox #récupere la case à cocher de la ligne
         ) 
 
-        phone_number = item.text() #récuper le numéro de tléphone dans le widget
+        phone_number = item.text() #récupere le numéro de tléphone dans le widget
 
-        if not self.is_valid_phone_number(phone_number): #si format invalide ( is_vali_phone_number return False)
+        if not self.is_valid_phone_number(phone_number): #si format invalide ( is_valid_phone_number return False)
             item.setForeground(QColor(Qt.red)) #texte en rouge
             checkbox.setChecked(False) #décoche la case à cocher
             checkbox_widget.setEnabled(False) #désactive la case à cocher
-            return False #retourn Faux
+            return False #retour Faux
         else:
             item.setForeground(QColor(Qt.black)) #sinon met le texte en noir
             return True #retour Vrai
 
     def check_date(self, row, column): #verifie que la date est valide 
 
-        item = self.table_widget.item(row, 1) #recupere le widget de la date du tableau
+        item = self.table_widget.item(row, 1) #recupere le widget de la date dans le tableau
 
         checkbox_widget = self.table_widget.cellWidget(item.row(), 6)#récupere le widget de la case à cocher
         checkbox = checkbox_widget.findChild(
@@ -846,17 +850,17 @@ class MainWindow(QWidget):
             item.setForeground(QColor(Qt.black))#sinon met le texte en noir
             return True#retourne Vraie
 
-    def set_enabled(self, row, column): #lance les fonction qui teste si les format sont correcte pour activer la case à cocher
+    def set_enabled(self, row, column): #lance les fonctions qui teste si les formats sont correctes pour activer la case à cocher
 
         checkbox_widget = self.table_widget.cellWidget(row, 6) #récupere le widget de la case à cocher
 
         if (
-            self.check_phone_number(row, column) #si toute les valeurs sont valide
+            self.check_phone_number(row, column) #si toute les valeurs sont valides
             and self.check_date(row, column)
             and self.check_hour(row, column)
         ):
             checkbox_widget.setEnabled(True) #active la case à cocher
-        else:
+        else:#sinon 
             self.check_date(row, column) #verifie tout de même la date et l'heure
             self.check_hour(row, column)
 
@@ -907,15 +911,15 @@ class MainWindow(QWidget):
         self.highlightKeywords() #met en srubrillance les keywords
         self.text_edit.show() #affiche l'élément
 
-    def onTextChanged(self): #fonction de temporisation pour ne pas surcharger d'exécution la focntion de surbrillance 
+    def onTextChanged(self): #fonction de temporisation pour ne pas surcharger d'exécution la fonction de surbrillance 
         if not self.highlighting: # si self.highlighting n'est pas en cours 
             self.highlighting = True
             self.highlightKeywords() #l'exécuter
             self.highlighting = False
 
-    def save_db_changed(self, type_num): #fonction de sauvegardes des changement des message de la db
+    def save_db_changed(self, type_num): #fonction de sauvegardes des changements des messages de la db
         self.db.active.cell(1, 1).value = self.text_edit.toPlainText() #récupere le message dans la zone d'édition de texte et remplace l'encienne version dans la DB
-        self.db.save("./database/db.xlsx") #sauvegarde les modification dans la base de donné
+        self.db.save("./database/db.xlsx") #sauvegarde les modifications dans la base de données
         self.connexion(type_num) #appel la fonction connexion pour continuer
 
     def highlightKeywords(self):
@@ -931,7 +935,7 @@ class MainWindow(QWidget):
         cursor.select(QTextCursor.Document) # Supprimer tout formatage existant
         cursor.setCharFormat(QTextCharFormat())
 
-        # Parcourir la liste de mots-clés et mettre en surbrillance chaque occurrence dans le texte
+        # Parcourir la liste de mots-clés et mettre en surbrillance chaque occurrences dans le texte
 
         for keyword in keywords: 
             index = text.find(keyword) 
@@ -951,3 +955,4 @@ if __name__ == "__main__": #fonction principal :main
     window = MainWindow() #creation de la fenetre principal
     window.show() #afficher l'élément
     sys.exit(app.exec_()) #fermeture si clique sur la croix
+  

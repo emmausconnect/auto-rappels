@@ -1,5 +1,5 @@
 
-# Auto_Rappel-Emmaus-Connect
+# Auto_Rappel-Emmaüs-Connect
 
 ## Installation
 
@@ -13,7 +13,7 @@ NB : Il se peut que Windows détecte un virus dans le dossier et bloque l'accès
 Sur le téléphone (Android uniquement), téléchargez le fichier `Airemore.apk`.
 Ouvrez le fichier et suivez les instructions d'installation.
 
-NB : Le téléphone peut demander d'autoriser l'installation d'applications de sources inconnues. Rendez-vous dans les paramètres du téléphone et recherchez "sources inconnues". Activez l'option autoriser l'installation de sources inconnues puis recommencez le processus d'installation de l'application.
+NB : Le téléphone peut demander d'autoriser l'installation d'applications de sources inconnues. Rendez-vous dans les paramètres du téléphone et recherchez "sources inconnues". Activez l'option `autoriser l'installation de sources inconnues` puis recommencez le processus d'installation de l'application.
 
 ## Utilisation
 
@@ -80,7 +80,6 @@ Une fois les modifications effectuées, cliquez sur Envoyer.
 Sur le smartphone, ouvrez l'application "Airemore".
 
 En haut à droite du téléphone, cliquez sur  &#8942;  -> `Adresse IP` et renseignez l'adresse IP du téléphone (sans le ":2333") dans le champ de texte sur l'ordinateur puis cliquez sur Envoyer.
-
 ![screen 8](Screen/screen_7.png)
 
 Une boîte de dialogue s'ouvre sur le téléphone et demande l'autorisation de se connecter : cliquez sur Confirmer.
@@ -96,4 +95,4 @@ NB : En cas d'erreur, vérifiez que l'adresse IP saisie est correcte et que le t
 NB : Des boîtes de dialogue peuvent s'ouvrir sur le téléphone et demander la confirmation d'envoi de plusieurs SMS, cliquez sur Oui.
 
 ![screen 6](Screen/screen_6.png)
-![screen 8](Screen/screen_8.png)
+![screen 8](Screen/screen_8.png)  
